@@ -32,6 +32,7 @@
     <script type="text/babel">
       const rootEl = document.querySelector("#app");
       const root = ReactDOM.createRoot(rootEl);
+      const {useState}=React;
 
       function Header({ children }) {
         return (
@@ -40,12 +41,61 @@
           </header>
         );
       }
-function Counter(){
-  return(
-    <div className="">
-      </div>
-  )
+      function Counter() {
+        const [count,setcount]=useState(0);
+        const increment=()=>setcount(count+1);
+        const decrement=()=>setcount(count-1)
+        return (
+          <div className="flex text-6xl border border-zinc-600 w-fit p-2 gap-3 mb-8">
+            <button onClick={decrement} className="bg-blue-300 rounded-sm">-</button>
+            <p>{count}</p>
+            <button onClick={increment} className="bg-blue-300 rounded-sm">+</button>
+          </div>
+        );
+      }
+      function Grid() {
+        const data = [
+          {
+            id: 1,
+            name: "React",
+            description: "A JavaScript library for building user interfaces",
+          },
+          {
+            id: 2,
+            name: "Angular",
+            description:
+              "A TypeScript-based open-source front-end web framework",
+          },
+          {
+            id: 3,
+            name: "Vue",
+            description:
+              "A progressive JavaScript framework for building user interfaces",
+          },
+          {
+            id: 4,
+            name: "Svelte",
+            description: "A compiler for building user interfaces",
+          },
+        ];
+
+        return (
+    <div className="flex  gap-4 cursor-pointer"> 
+      {data.map((item) => {
+        return (
+          <div key={item.id} className="bg-slate-300 p-4 w-56">
+            <div>
+              <p className="font-bold">{item.name}</p>
+              <p>{item.description}</p>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
 }
+
+
       function Main() {
         return (
           <main className="px-8 py-6 container">
@@ -57,6 +107,8 @@ function Counter(){
                 package.json
               </code>
             </p>
+            <Counter/>
+            <Grid />
           </main>
         );
       }
