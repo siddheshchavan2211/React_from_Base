@@ -46,14 +46,18 @@
         const increment=()=>setcount(count+1);
         const decrement=()=>setcount(count-1)
         return (
+          <React.Fragment>
           <div className="flex text-6xl border border-zinc-600 w-fit p-2 gap-3 mb-8">
             <button onClick={decrement} className="bg-blue-300 rounded-sm">-</button>
             <p>{count}</p>
             <button onClick={increment} className="bg-blue-300 rounded-sm">+</button>
           </div>
+          <Grid limit={count}/>
+          </React.Fragment>
         );
       }
-      function Grid() {
+      function Grid({limit=1}) {
+       
         const data = [
           {
             id: 1,
@@ -78,10 +82,10 @@
             description: "A compiler for building user interfaces",
           },
         ];
-
+        const limitcard=data.slice(0, limit < 0 ? 0 : limit);
         return (
     <div className="flex  gap-4 cursor-pointer"> 
-      {data.map((item) => {
+      {limitcard.map((item) => {
         return (
           <div key={item.id} className="bg-slate-300 p-4 w-56">
             <div>
@@ -108,7 +112,7 @@
               </code>
             </p>
             <Counter/>
-            <Grid />
+           {/**<Grid limit={0}/>**/}
           </main>
         );
       }
